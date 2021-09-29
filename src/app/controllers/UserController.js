@@ -1,3 +1,5 @@
+import Queue from "../lib/Queue";
+
 export default {
     async store(req, res) {
         const { name, email, password } = req.body;
@@ -7,6 +9,8 @@ export default {
             email,
             password
         };
+
+        await Queue.add('RegistrationNewMail',{ user });
 
         return res.json(user)
     }
